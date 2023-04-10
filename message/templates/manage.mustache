@@ -1,0 +1,17 @@
+{{!
+    @template local_message/manage
+    Example context (json):
+    {
+    }
+}}
+
+<h1>Employees</h1>
+<p>{{message}}<p>
+
+{{#employees}}
+    {{name}} belongs to the {{department}} department
+{{/employees}}
+
+{{^employees}}
+    No employee has been hired yet.
+{{/employees}}
