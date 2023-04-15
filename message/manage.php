@@ -3,7 +3,7 @@ require_once(__DIR__ . '/../../config.php');
 
 $PAGE->set_url(new moodle_url('/local/message/manage.php'));
 $PAGE->set_context(\context_system::instance()); // The global context will be used
-$PAGE->set_title(get_string('Manage Page'));
+$PAGE->set_title('Manage Page');
 
 $employee1 = ["name" => "John", "department" => "Sales"];
 $employee2 = ["name" => "Mark", "department" => "Security"];
