@@ -1,23 +1,26 @@
 <?php
 require_once(__DIR__ . '/../../config.php');
 
+global $DB;
+
+require_login();
+$context = context_system::instance();
+
 $PAGE->set_url(new moodle_url('/local/message/manage.php'));
-$PAGE->set_context(\context_system::instance()); // The global context will be used
-$PAGE->set_title('Manage Page');
+$PAGE->set_context(\context_system::instance());
+$PAGE->set_title("Manage Page");
+$PAGE->set_heading("Manage Page");
+$PAGE->requires->js_call_amd('local_message/confirm');
+$PAGE->requires->css('/local/message/styles.css');
 
-$employee1 = ["name" => "John", "department" => "Sales"];
-$employee2 = ["name" => "Mark", "department" => "Security"];
-$employees = array_values([$employee1, $employee2]);
-
-// The template has its own context
-$templatecontext = (object)[
-    'employees' => $employees,
-    'message' => "This is the view for hired employees"
-];
+$messages = $DB->get_records('local_message', null, 'id');
 
 echo $OUTPUT->header();
+$templatecontext = (object)[
+    'messages' => array_values($messages),
+    'editurl' => new moodle_url('/local/message/edit.php'),
+];
 
-// To call the mustache provide its location and its context
 echo $OUTPUT->render_from_template('local_message/manage', $templatecontext);
 
 echo $OUTPUT->footer();
