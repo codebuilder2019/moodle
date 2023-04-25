@@ -22,5 +22,4 @@ $templatecontext = (object)[
 ];
 
 echo $OUTPUT->render_from_template('local_message/manage', $templatecontext);
-
 echo $OUTPUT->footer();
